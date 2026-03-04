@@ -21,18 +21,22 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--light-bg); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
 
-        /* Navigation */
+        /* --- Navigation Styling --- */
         nav {
             background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
             padding: 1rem 8%; display: flex; justify-content: space-between; align-items: center;
             position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.05);
         }
-        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.4rem; color: var(--primary); }
-        .logo img { height: 40px; }
-        nav ul { display: flex; list-style: none; gap: 25px; }
-        nav ul li a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.4rem; color: var(--primary); }
+        .logo img { height: 40px; width: auto; }
+        
+        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links li a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links li a:hover { color: var(--accent); }
 
-        /* Hero */
+        .menu-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; z-index: 1001; }
+
+        /* --- Hero --- */
         #home {
             height: 100vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero-sensiva.jpg');
             background-size: cover; background-position: center;
@@ -40,67 +44,77 @@
         }
         .hero-content h1 { font-size: 4rem; letter-spacing: -2px; margin-bottom: 1rem; }
 
-        /* Sections */
+        /* --- Sections --- */
         section { padding: 100px 8%; }
         .section-title { text-align: center; margin-bottom: 60px; }
         .section-title h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
         .section-title .line { width: 70px; height: 5px; background: var(--accent); margin: 0 auto; border-radius: 5px; }
 
-        /* Grid & Cards */
+        /* --- Grid & Cards --- */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .tech-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .glass-card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); transition: 0.4s; text-align: center; }
         .glass-card:hover { transform: translateY(-10px); border-bottom: 5px solid var(--accent); }
 
-        /* Table */
+        /* --- Table --- */
+        .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; background: white; border-radius: 20px; overflow: hidden; }
         th, td { padding: 20px; text-align: left; border-bottom: 1px solid #eee; }
         th { background: var(--primary-gradient); color: white; }
 
-        /* Team */
+        /* --- Team --- */
         .mentor-box { background: var(--primary-gradient); color: white; padding: 40px; border-radius: 30px; display: flex; align-items: center; gap: 40px; margin-bottom: 50px; }
-        .mentor-box img { width: 160px; height: 160px; border-radius: 20px; object-fit: cover; }
+        .mentor-box img { width: 160px; height: 160px; border-radius: 20px; object-fit: cover; border: 3px solid rgba(255,255,255,0.3); }
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; }
         .team-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* Update CSS untuk responsif mobile */
+        footer { background: #0b1a13; color: white; padding: 40px 8%; text-align: center; }
+
+        /* --- Responsive Mobile --- */
         @media (max-width: 768px) {
-            .hero-content h1 { 
-                font-size: 2.2rem; /* Ukuran h1 lebih kecil di mobile */
-                padding: 0 10px;
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed; right: -100%; top: 0; height: 100vh; width: 250px;
+                background: var(--white); flex-direction: column; padding: 80px 30px;
+                gap: 25px; transition: 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000;
             }
-            .hero-content p {
-                font-size: 1rem;
-                padding: 0 15px;
+            .nav-links.active { right: 0; }
+            .sidebar-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.5); display: none; z-index: 999;
             }
-            .mentor-box {
-                flex-direction: column;
-                padding: 20px;
-                text-align: center;
-            }
-            .mentor-box img {
-                width: 120px;
-                height: 120px;
-                margin-bottom: 15px;
-            }
-            section {
-                padding: 60px 5%; /* Padding lebih kecil agar teks tidak terjepit */
-            }
+            .sidebar-overlay.active { display: block; }
+
+            .hero-content h1 { font-size: 2.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .mentor-box { flex-direction: column; text-align: center; }
+            section { padding: 60px 5%; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo"><img src="logo-unnes.png" alt="UNNES"> <img src="logo-fuscore.png" alt="FUSCORE"><span>SENSIVA</span></div>
-        <ul>
+        <div class="logo">
+            <img src="logo-unnes.png" alt="UNNES"> 
+            <img src="logo-fuscore.png" alt="FUSCORE">
+            <span>SENSIVA</span>
+        </div>
+
+        <ul class="nav-links">
             <li><a href="#home">Beranda</a></li>
             <li><a href="#problem">Urgensi</a></li>
             <li><a href="#tech">Teknologi</a></li>
             <li><a href="#impact">Eco-Impact</a></li>
             <li><a href="#team">Tim</a></li>
         </ul>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
     </nav>
+
+    <div class="sidebar-overlay" onclick="toggleMenu()"></div>
 
     <header id="home">
         <div class="hero-content" data-aos="zoom-in">
@@ -141,6 +155,8 @@
         </div>
     </section>
 
+    
+
     <section id="mechanism">
         <div class="section-title" data-aos="fade-up"><h2>Cara Kerja Pintar</h2><div class="line"></div></div>
         <div class="grid-2">
@@ -151,8 +167,6 @@
             <div data-aos="fade-left"><img src="mekanisme-kerja.png" alt="Mekanisme" style="width: 100%; border-radius: 20px;"></div>
         </div>
     </section>
-
-    
 
     <section id="impact" style="background: #eef5f2;">
         <div class="section-title" data-aos="fade-up"><h2>Dampak Ekonomi & Lingkungan</h2><div class="line"></div></div>
@@ -172,15 +186,15 @@
 
     <section id="comparison" style="background: white;">
         <div class="section-title" data-aos="fade-up"><h2>Mengapa SENSIVA Lebih Baik?</h2><div class="line"></div></div>
-        <div style="overflow-x: auto;" data-aos="fade-up">
+        <div class="table-container" data-aos="fade-up">
             <table>
                 <thead>
                     <tr><th>Fitur</th><th>Salep Konvensional</th><th style="background: var(--accent);">SENSIVA Textile</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Aplikasi</td><td>Dioles Manual</td><td>Otomatis (Sistem Wearable)</td></tr>
-                    <tr><td>Efek Samping</td><td>Resiko Penipisan Kulit</td><td>Aman & Terkontrol</td></tr>
-                    <tr><td>Bahan</td><td>Kimia Sintetik</td><td>Biomaterial Organik</td></tr>
+                    <tr><td><b>Aplikasi</b></td><td>Dioles Manual</td><td>Otomatis (Sistem Wearable)</td></tr>
+                    <tr><td><b>Efek Samping</b></td><td>Resiko Penipisan Kulit</td><td>Aman & Terkontrol</td></tr>
+                    <tr><td><b>Bahan</b></td><td>Kimia Sintetik</td><td>Biomaterial Organik</td></tr>
                 </tbody>
             </table>
         </div>
@@ -196,9 +210,21 @@
             </div>
         </div>
         <div class="team-grid">
-            <div class="team-card" data-aos="fade-up"><img src="ketua.jpg" class="team-img"><h4>Najma Kamila Annafiisa</h4><p>Ketua Tim</p></div>
-            <div class="team-card" data-aos="fade-up" data-aos-delay="100"><img src="anggota2.jpg" class="team-img"><h4>Bintang Ivander Allvasta</h4><p>Digitalisasi & UI/UX</p></div>
-            <div class="team-card" data-aos="fade-up" data-aos-delay="200"><img src="anggota1.jpg" class="team-img"><h4>Zakia Rahmawati</h4><p>Riset Material</p></div>
+            <div class="team-card" data-aos="fade-up">
+                <img src="ketua.jpg" class="team-img">
+                <h4>Najma Kamila Annafiisa</h4>
+                <p>Ketua Tim</p>
+            </div>
+            <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="anggota2.jpg" class="team-img">
+                <h4>Bintang Ivander Allvasta</h4>
+                <p>Digitalisasi & UI/UX</p>
+            </div>
+            <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="anggota1.jpg" class="team-img">
+                <h4>Zakia Rahmawati</h4>
+                <p>Riset Material</p>
+            </div>
         </div>
     </section>
 
@@ -209,18 +235,39 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
+
+        // Fungsi Hamburger Menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const menuIcon = document.querySelector('.menu-toggle i');
+
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            if (navLinks.classList.contains('active')) {
+                menuIcon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                menuIcon.classList.replace('fa-times', 'fa-bars');
+            }
+        }
+
+        // Smooth Scroll & Auto-Close Menu
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                
+                // Tutup menu jika sedang terbuka (mobile)
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
             });
         });
     </script>
 </body>
-
 </html>
-
-
-
-
-
