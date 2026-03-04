@@ -63,7 +63,30 @@
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; }
         .team-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .hero-content h1 { font-size: 2.5rem; } nav ul { display: none; } }
+        /* Update CSS untuk responsif mobile */
+        @media (max-width: 768px) {
+            .hero-content h1 { 
+                font-size: 2.2rem; /* Ukuran h1 lebih kecil di mobile */
+                padding: 0 10px;
+            }
+            .hero-content p {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+            .mentor-box {
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+            }
+            .mentor-box img {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 15px;
+            }
+            section {
+                padding: 60px 5%; /* Padding lebih kecil agar teks tidak terjepit */
+            }
+        }
     </style>
 </head>
 <body>
@@ -196,4 +219,5 @@
 </body>
 
 </html>
+
 
